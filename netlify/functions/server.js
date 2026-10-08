@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieSession({
   name: 'session',
-  keys: [process.env.SESSION_SECRET || 'default-secret-key-change-in-production'],
+  keys: [process.env.SESSION_SECRET || 'PLEASE_SET_SESSION_SECRET_IN_NETLIFY_UI'],
   maxAge: 24 * 60 * 60 * 1000,
   httpOnly: true,
   secure: process.env.NODE_ENV === 'production',
