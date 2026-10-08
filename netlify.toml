@@ -2,6 +2,9 @@
   functions = "netlify/functions"
   publish = "public"
 
+[build.environment]
+  SECRETS_SCAN_OMIT_PATHS = "README.md"
+
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/server/:splat"

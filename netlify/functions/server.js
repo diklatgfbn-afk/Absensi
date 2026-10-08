@@ -6,6 +6,20 @@ const { query, initDb } = require('../../db');
 
 const app = express();
 
+// Initialize database once
+let dbInitialized = false;
+(async () => {
+  if (!dbInitialized) {
+    try {
+      await initDb();
+      dbInitialized = true;
+      console.log('Database initialized');
+    } catch (err) {
+      console.error('Failed to initialize database:', err);
+    }
+  }
+})();
+
 // ─────────────────────────────────────────────
 // MIDDLEWARE
 // ─────────────────────────────────────────────
@@ -40,6 +54,18 @@ app.get('/api/health', (req, res) => {
       SESSION_SECRET: process.env.SESSION_SECRET ? 'SET' : 'MISSING'
     }
   });
+});
+
+app.post('/api/admin/init-db', async (req, res) => {
+  try {
+    console.log('Starting database initialization...');
+    await initDb();
+    dbInitialized = true;
+    res.json({ success: true, message: 'Database initialized successfully' });
+  } catch (err) {
+    console.error('Init DB error:', err);
+    res.status(500).json({ error: err.message, details: err.toString() });
+  }
 });
 
 // ─────────────────────────────────────────────

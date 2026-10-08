@@ -23,7 +23,7 @@ npm install
 Di Netlify Dashboard → Site configuration → Environment variables, set:
 
 - `DATABASE_URL`: PostgreSQL connection string dari Supabase
-- `SESSION_SECRET`: Random string (misal: `my-secret-key-123`)
+- `SESSION_SECRET`: Random string bebas
 
 ### 3. Deploy
 
